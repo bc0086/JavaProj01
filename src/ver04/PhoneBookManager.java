@@ -1,11 +1,14 @@
 package ver04;
 
 import java.util.Scanner;
-import ver03.PhoneInfo;
+import ver04.PhoneCompanyInfo;
+import ver04.PhoneSchoolInfo;
+import ver04.PhoneInfo;
 
 public class PhoneBookManager {
 
-// 프로그램의 흐름을 제어하는 목적으로 생성하는 클래스로 해당 프로그램에서 기능을 담당하게 된다.
+// 프로그램의 흐름을 제어하는 목적으로 생성하는 클래스로 해당 프로그램에서 
+//	기능을 담당하게 된다.
 	private PhoneInfo[] piArr;
 	private int numOfPerson;// 친구정보를 추가할때마다 +1 증가
 
@@ -23,9 +26,8 @@ public class PhoneBookManager {
 //		String name, phoneNumber, birthday;
 		String name, phoneNumber;
 
-		
-		System.out.print("데이터 입력을 시작합니다..\n" + 
-				"1.일반, 2.동창, 3.회사\n");
+		System.out.print("데이터 입력을 시작합니다.." + 
+				"1.일반, 2.동창, 3.회사");
 		
 		int choice = scan.nextInt();
 		
@@ -36,17 +38,16 @@ public class PhoneBookManager {
 		phoneNumber = scan.nextLine();
 		
 		switch (choice) {
-		case 1:
-			
+		case 1: //일반
 			piArr[numOfPerson++] = new PhoneInfo(name, phoneNumber);
-			
 			break;
-		case 2:
-			System.out.print("이름:");
-			name = scan.nextLine();
-			System.out.print("이름:");
-			name = scan.nextLine();
-			piArr[numOfPerson++] = new PhoneSchoolInfo(name, phoneNumber, );
+			
+		case 2: //동창
+			System.out.print("전공:");
+			major = scan.nextLine();
+			System.out.print("학년:");
+			grade = scan.nextLine();
+			piArr[numOfPerson++] = new PhoneSchoolInfo(major, grade);
 			break;
 		case 3:
 			
@@ -55,13 +56,7 @@ public class PhoneBookManager {
 		default:
 			break;
 		}
-		
-		
-		
-		
-		
-		
-
+	
 
 		
 //		piArr[numOfPerson++] = new PhoneInfo(name, phoneNumber, birthday);	

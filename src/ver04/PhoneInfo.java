@@ -8,7 +8,8 @@ public class PhoneInfo {
 	String phoneNumber;	
 
 //	// 생성자
-//	public PhoneInfo(String name, String phoneNumber, String birthday) {
+//	public PhoneInfo(String name, String phoneNumber, 
+//			String birthday) {
 //		super();
 //		this.name = name;
 //		this.phoneNumber = phoneNumber;
