@@ -1,4 +1,4 @@
-package ver03;
+package ver04;
 
 import java.util.Scanner;
 import ver03.PhoneInfo;
@@ -20,19 +20,52 @@ public class PhoneBookManager {
 
 		// 사용자로부터 친구정보를 입력받기위한 준비
 		Scanner scan = new Scanner(System.in);
-		String name, phoneNumber, birthday;
+//		String name, phoneNumber, birthday;
+		String name, phoneNumber;
 
+		
+		System.out.print("데이터 입력을 시작합니다..\n" + 
+				"1.일반, 2.동창, 3.회사\n");
+		
+		int choice = scan.nextInt();
+		
 		// 공통사항 입력받기
 		System.out.print("이름:");
 		name = scan.nextLine();
-
 		System.out.print("전화번호:");
 		phoneNumber = scan.nextLine();
-
-		System.out.print("생년월일:");
-		birthday = scan.nextLine();
 		
-		piArr[numOfPerson++] = new PhoneInfo(name, phoneNumber, birthday);	
+		switch (choice) {
+		case 1:
+			
+			piArr[numOfPerson++] = new PhoneInfo(name, phoneNumber);
+			
+			break;
+		case 2:
+			System.out.print("이름:");
+			name = scan.nextLine();
+			System.out.print("이름:");
+			name = scan.nextLine();
+			piArr[numOfPerson++] = new PhoneSchoolInfo(name, phoneNumber, );
+			break;
+		case 3:
+			
+			break;
+
+		default:
+			break;
+		}
+		
+		
+		
+		
+		
+		
+
+
+		
+//		piArr[numOfPerson++] = new PhoneInfo(name, phoneNumber, birthday);	
+		piArr[numOfPerson++] = new PhoneInfo(name, phoneNumber);	
 		System.out.println("데이터 입력이 완료되었습니다.");
 	}
 	

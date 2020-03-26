@@ -1,8 +1,9 @@
 import java.util.Scanner;
-import ver03.PhoneBookManager;
-import ver03.PhoneInfo;
+import ver04.PhoneBookManager;
+import ver04.PhoneInfo;
+import ver04.PhoneCompanyInfo;
 
-public class PhoneBookVer03 {
+public class PhoneBookVer04 {
 
 	public static void printMenu() {
 		
@@ -14,28 +15,6 @@ public class PhoneBookVer03 {
 		System.out.println("4. 주소록 출력");
 		System.out.println("5. 프로그램 종료");
 	}
-
-//	public static void dataInput() {
-//
-//		// 사용자로부터 친구정보를 입력받기 위한 준비
-//		Scanner scan = new Scanner(System.in);
-//		String name, phoneNumber, birthday;
-//
-//		// 공통사항 입력받기
-//		System.out.print("이름:");
-//		name = scan.nextLine();
-//
-//		System.out.print("전화번호:");
-//		phoneNumber = scan.nextLine();
-//
-//		System.out.print("생년월일:");
-//		birthday = scan.nextLine();
-//
-//		PhoneInfo phoneinfo = new PhoneInfo(name, phoneNumber, birthday);
-//		
-//		phoneinfo.dataAllShow();
-//
-//	}
 
 	public static void main(String[] args) {
 
@@ -49,8 +28,9 @@ public class PhoneBookVer03 {
 
 			switch (choice) {
 			case 1: //데이터입력 완
+				//
 				piArr.dataInput();
-				break;
+				
 				
 			case 2: //데이터검색 완
 				piArr.dataSearch();
