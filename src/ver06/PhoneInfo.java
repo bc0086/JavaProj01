@@ -1,11 +1,11 @@
-package ver04;
+package ver06;
 
 import java.util.Scanner;
 
 public class PhoneInfo {
 	// 멤버변수
-	public String name;
-	public String phoneNumber;	
+	String name;
+	String phoneNumber;	
 
 	public PhoneInfo(String name, String phoneNumber) {
 		super();

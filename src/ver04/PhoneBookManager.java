@@ -7,10 +7,8 @@ import ver04.PhoneInfo;
 
 public class PhoneBookManager {
 
-// 프로그램의 흐름을 제어하는 목적으로 생성하는 클래스로 해당 프로그램에서 
-//	기능을 담당하게 된다.
 	private PhoneInfo[] piArr;
-	private int numOfPerson;// 친구정보를 추가할때마다 +1 증가
+	private int numOfPerson;
 
 	// 생성자 : 인자로 전달되는 num크기로 객체배열을 생성한다.
 	public PhoneBookManager(int num) {
@@ -21,64 +19,68 @@ public class PhoneBookManager {
 	// 데이터입력
 	public void dataInput() {
 
-		// 사용자로부터 친구정보를 입력받기위한 준비
 		Scanner scan = new Scanner(System.in);
-//		String name, phoneNumber, birthday;
-		String name, phoneNumber;
+		String name, phoneNumber, major, emp;
+		int grade;		
 
-		System.out.print("데이터 입력을 시작합니다.." + 
-				"1.일반, 2.동창, 3.회사");
+		System.out.println("데이터 입력을 시작합니다.."); 
+		System.out.print("1.일반, 2.동창, 3.회사");
 		
 		int choice = scan.nextInt();
 		
 		// 공통사항 입력받기
-		System.out.print("이름:");
-		name = scan.nextLine();
-		System.out.print("전화번호:");
-		phoneNumber = scan.nextLine();
+		System.out.println("이름:");
+		name = scan.next();
+				
+		System.out.println("전화번호:");
+		phoneNumber = scan.next();
 		
 		switch (choice) {
 		case 1: //일반
 			piArr[numOfPerson++] = new PhoneInfo(name, phoneNumber);
 			break;
 			
-		case 2: //동창
+		case 2: //동창			
 			System.out.print("전공:");
-			major = scan.nextLine();
-			System.out.print("학년:");
-			grade = scan.nextLine();
-			piArr[numOfPerson++] = new PhoneSchoolInfo(major, grade);
-			break;
-		case 3:
+			major = scan.next();			
 			
+			System.out.print("학년:");
+			grade = scan.nextInt();	
+			
+			piArr[numOfPerson++] = 
+					new PhoneSchoolInfo(name, phoneNumber, major, grade);
 			break;
-
-		default:
+			
+		case 3: //회사
+			System.out.print("회사명:");
+			emp = scan.next();
+			
+			piArr[numOfPerson++] = new PhoneCompanyInfo(name, phoneNumber, emp);			
 			break;
-		}
-	
-
 		
-//		piArr[numOfPerson++] = new PhoneInfo(name, phoneNumber, birthday);	
-		piArr[numOfPerson++] = new PhoneInfo(name, phoneNumber);	
+		}
+					
 		System.out.println("데이터 입력이 완료되었습니다.");
+		System.out.println();
 	}
 	
 	//데이터 검색
 	public void dataSearch() {
 	
 		Scanner scan = new Scanner(System.in);
+		
 		System.out.print("검색할 이름을 입력하세요:");
 		
 		String searchName = scan.nextLine();
 
 		for(int i = 0 ; i < numOfPerson ; i++) {			
-			System.out.println("검색중인이름:"+ piArr[i].getName());
+			System.out.println("검색중인이름:"+ piArr[i].name);
 			
 			//검색할 이름과 객체의 이름이 일치하는 경우 모든정보를 출력함
-			if(searchName.compareTo(piArr[i].getName())==0) {
+			if(searchName.compareTo(piArr[i].name) == 0) {
 				piArr[i].dataAllShow();
 				System.out.println("데이터 검색이 완료되었습니다.");
+				System.out.println();
 			}
 		}
 	}////end of dataSearch
@@ -97,7 +99,7 @@ public class PhoneBookManager {
 		int deleteIndex = -1;
 
 		for(int i = 0 ; i < numOfPerson ; i++) {
-			if(deleteName.compareTo(piArr[i].getName())==0) {
+			if(deleteName.compareTo(piArr[i].name)==0) {
 				//요소를 삭제하기 위해 참조값을 null로 변경
 				piArr[i] = null;
 				//삭제된 요소의 인덱스값 저장
