@@ -23,23 +23,23 @@ public class PhoneBookVer07 implements MenuItem {
 				choice = scan.nextInt();
 
 				switch (choice) {
-				case DATA_INPUT: // 데이터입력 완
+				case DATA_INPUT: 
 					piArr.dataInput();
 					break;
 
-				case DATA_SELECT: // 데이터검색 완
+				case DATA_SELECT:
 					piArr.dataSearch();
 					break;
 
-				case DATA_DELETE: // 데이터삭제 완
+				case DATA_DELETE: 
 					piArr.dataDelete();
 					break;
 
-				case DATA_OUTPUT: // 주소록출력 완
+				case DATA_OUTPUT: 
 					piArr.dataAllShow();
 					break;
 
-				case EXIT: // 프로그램 종료 완
+				case EXIT: 
 					System.out.println("프로그램을 종료합니다.");
 					System.out.println("<<< Process finished." + "(Exit code 0)");
 					return;
