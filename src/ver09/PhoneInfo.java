@@ -1,11 +1,12 @@
-package ver07;
+package ver09;
 
+import java.io.Serializable;
 import java.util.Scanner;
 
-public class PhoneInfo {
+public class PhoneInfo implements Serializable	{
 	// 멤버변수
-	public String name;
-	public String phoneNumber;
+	String name;
+	String phoneNumber;
 
 	public PhoneInfo(String name, String phoneNumber) {
 		super();
@@ -48,17 +49,6 @@ public class PhoneInfo {
 		}
 	}
 }
-//	@Override
-//	public boolean equals(Object obj) {
-//		//형변환
-//		PhoneInfo phoneinfo = (PhoneInfo)obj;
-//		if(phoneinfo.name.equals(this.name) &&
-//				phoneinfo.phoneNumber.equals(this.phoneNumber)) {
-//			return true;
-//		}
-//		else {
-//			return false;
-//		}
-//	}
+
 
 

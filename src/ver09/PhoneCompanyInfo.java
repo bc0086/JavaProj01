@@ -1,6 +1,8 @@
-package ver07;
+package ver09;
 
-public class PhoneCompanyInfo extends PhoneInfo {
+import java.io.Serializable;
+
+public class PhoneCompanyInfo extends PhoneInfo   {
 	String emp; //회사명
 	
 	public PhoneCompanyInfo(String name, String phoneNumber, String emp) {

@@ -4,7 +4,8 @@ import java.util.Scanner;
 
 public class PhoneInfo {
 	// 멤버변수
-	public String name;
+	public 
+	String name;
 	public String phoneNumber;	
 
 	public PhoneInfo(String name, String phoneNumber) {
