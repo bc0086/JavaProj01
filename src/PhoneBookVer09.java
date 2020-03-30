@@ -36,6 +36,7 @@ public class PhoneBookVer09 implements MenuItem {
 					break;
 
 				case DATA_OUTPUT: // 주소록출력
+					set.loadPhoneBookInfo();
 					set.dataAllShow();
 					break;
 

@@ -1,6 +1,8 @@
 package ver08;
 import java.lang.Exception;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -18,8 +20,6 @@ public class PhoneBookManager implements SubMenuItem  {
 	
 	//set컬렉션 생성
 	HashSet<PhoneInfo> set = new HashSet<PhoneInfo>();
-
-	
 
 	public void printMenu() {
 
@@ -240,7 +240,6 @@ public class PhoneBookManager implements SubMenuItem  {
 	
 	//정보를 파일형태로 저장하기
 	public void savePhoneBookInfo() {
-		System.out.println("saf");
 		try {
 			ObjectOutputStream out = new ObjectOutputStream(
 					new FileOutputStream("src/ver08/PhoneBook.obj"));
@@ -257,7 +256,32 @@ public class PhoneBookManager implements SubMenuItem  {
 			e.printStackTrace();
 		}		
 	}
-
+	
+	public void loadPhoneBookInfo() {
+		
+		try {
+			//역직렬화(복원)을 위한 스트림 생성
+			ObjectInputStream in = new ObjectInputStream(
+					new FileInputStream("src/ver08/PhoneBook.obj"));
+			
+			//저장된 파일에서 정보 1개 읽어오기
+			HashSet<PhoneInfo> loadset = (HashSet<PhoneInfo>) in.readObject();
+			
+			Iterator<PhoneInfo> itr = loadset.iterator();
+			
+			while(itr.hasNext()) {			
+				itr.next().dataAllShow();
+			}	
+					
+		}
+		
+		catch(Exception e) {
+			System.out.println("예외발생");
+			e.printStackTrace();
+		}
+		
+	} //end of loadPhoneBookInfo
+			
 }
 
 
