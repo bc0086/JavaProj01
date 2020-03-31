@@ -1,60 +1,153 @@
 package ver09;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Scanner;
-import ver03.PhoneInfo;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 
 public class PhoneBookManager {
-
-// 프로그램의 흐름을 제어하는 목적으로 생성하는 클래스로 해당 프로그램에서 기능을 담당하게 된다.
-	private PhoneInfo[] piArr;
-	private int numOfPerson;// 친구정보를 추가할때마다 +1 증가
-
-	// 생성자 : 인자로 전달되는 num크기로 객체배열을 생성한다.
-	public PhoneBookManager(int num) {
-		piArr = new PhoneInfo[num];
-		numOfPerson = 0;
+	
+	//멤버변수
+	Connection con; // DB연결을 위한 객체
+	Statement stmt; // 쿼리전송 및 실행을 위한 객체
+	PreparedStatement psmt;
+	ResultSet rs;
+	
+	public PhoneBookManager() { //db연결
+		try {
+			//1.오라클 드라이버 로드
+			Class.forName("oracle.jdbc.OracleDriver");
+			//2.커넥션 객체를 통해 DB연결
+			con = DriverManager.getConnection(
+					"jdbc:oracle:thin://@localhost:1521:orcl",
+					"kosmo",
+					"1234");
+			System.out.println("오라클 DB 연결성공");
+		 }
+		 catch (ClassNotFoundException e) {
+			 //ojdbc6.jar파일이 없거나 연동되지 않았을때 예외발생
+			 System.out.println("오라클 드라이버 로딩 실패");
+			 e.printStackTrace();
+		 }
+		 catch (SQLException e) {
+			 //커넥션URL이나 계정명이 잘못되었을때 발생되는 예외
+			 System.out.println("DB 연결 실패");
+			 e.printStackTrace();
+		 }
+		 catch (Exception e) {
+			 System.out.println("알수 없는 예외발생");
+		 }
 	}
-
+	
 	// 데이터입력
+	
 	public void dataInput() {
-
-		// 사용자로부터 친구정보를 입력받기위한 준비
-		Scanner scan = new Scanner(System.in);
-		String name, phoneNumber, birthday;
-
-		// 공통사항 입력받기
-		System.out.print("이름:");
-		name = scan.nextLine();
-
-		System.out.print("전화번호:");
-		phoneNumber = scan.nextLine();
-
-		System.out.print("생년월일:");
-		birthday = scan.nextLine();
-		
-		piArr[numOfPerson++] = new PhoneInfo(name, phoneNumber, birthday);	
-		System.out.println("데이터 입력이 완료되었습니다.");
+		try {
+			//1.쿼리문준비 : 값의 세팅이 필요한 부분을 ?로 대체한다. 
+			String query = "INSERT INTO phonebook_tb VALUES (?, ?, ?)";
+			
+			//2.prepared객체 생성 : 생성시 준비한 쿼리문을 인자로 전달한다. 
+			psmt = con.prepareStatement(query);
+			
+			// 공통사항 입력받기
+			Scanner scan = new Scanner(System.in);
+			
+			System.out.print("이름:");
+			String name = scan.nextLine();
+			
+			System.out.print("전화번호:");
+			String phone = scan.nextLine();
+			
+			System.out.print("생일:");
+			String birthday = scan.nextLine();
+			
+			//4.인파라미터 설정하기 : ?의 순서대로 설정하고 DB이므로 인덱스는 1부터 시작.
+			psmt.setString(1, name);
+			psmt.setString(2, phone);
+			psmt.setString(3, birthday);
+			
+			//5.쿼리실행을 위해 prepared객체를 실행한다. 
+			int affected = psmt.executeUpdate();
+			System.out.println(affected +"행이 입력되었습니다.");
+			
+		}
+		catch(Exception e) {
+			System.out.println("이미 저장된 이름입니다. 다른이름을 입력하세요.");
+		}
+		finally {
+			close();
+		}
 	}
 	
-	//데이터 검색
-	public void dataSearch() {
-	
-		Scanner scan = new Scanner(System.in);
-		System.out.print("검색할 이름을 입력하세요:");
-		
-		String searchName = scan.nextLine();
-
-		for(int i = 0 ; i < numOfPerson ; i++) {			
-			System.out.println("검색중인이름:"+ piArr[i].getName());
-			
-			//검색할 이름과 객체의 이름이 일치하는 경우 모든정보를 출력함
-			if(searchName.compareTo(piArr[i].getName())==0) {
-				piArr[i].dataAllShow();
-				System.out.println("데이터 검색이 완료되었습니다.");
-			}
+	public void close() {
+		try {
+			//if(con!=null) con.close();
+			if(psmt!=null) psmt.close();	
+			if(stmt!=null) stmt.close();
+			if(rs!=null) rs.close();
+			System.out.println("자원 반납 완료");
 		}
-	}////end of dataSearch
+		catch(Exception e) {
+			System.out.println("자원 반납시 오류발생");
+			e.printStackTrace();
+		}
+	}
 	
+	public String scanValue(String title) {		
+		Scanner scan = new Scanner(System.in);
+		System.out.print(title +"을(를) 입력(exit->종료):");
+		String inputStr = scan.nextLine();
+		/*
+		equalsIgnoreCase()
+		 	: equals()메소드와 동일하게 문자열이 같은지 비교하는 메소드로
+		 	다른점은 대소문자를 구분하지 않는다. 
+		 */
+		if("EXIT".equalsIgnoreCase(inputStr)) {   
+			System.out.println("프로그램을 종료합니다.");
+			close();
+			//프로그램 자체가 즉시 종료된다. 
+			System.exit(0);
+		}
+		
+		return inputStr;
+	}
+
+	public void dataSearch() {
+		try {   
+			
+			Scanner scan = new Scanner(System.in);
+			System.out.print("검색할 이름을 입력하세요:");		
+			String searchName = scan.nextLine();
+			
+			stmt = con.createStatement();
+			
+			String query = "SELECT name, phone, birthday "
+					+ "FROM phonebook_tb "
+					+ "WHERE name like '" + searchName +"'";
+			
+			rs = stmt.executeQuery(query);
+			while(rs.next()) {
+				String name = rs.getString("name");
+				String phone = rs.getString("phone");
+				String birthday = rs.getString("birthday");
+				System.out.printf("이름. %-5s 전화번호. %-5s 생일. %-5s\n", name, phone, birthday);
+			}
+						
+		}
+		catch(SQLException e) {
+			System.out.println("쿼리오류발생");
+			e.printStackTrace();
+		
+		}
+		finally {
+			close(); //DB자원반납
+		}
+	}	
+
 	//데이터 삭제	
 	public void dataDelete() {
 		
@@ -62,50 +155,58 @@ public class PhoneBookManager {
 		System.out.print("삭제할 이름을 입력하세요:");
 		String deleteName = scan.nextLine();
 		
-		/*
-		배열의 요소중 삭제된 요소의 인덱스값을 저장할 용도의변수.
-		요소를 삭제한후 빈자리를 채울때 사용할 예정임.
-		 */
-		int deleteIndex = -1;
-
-		for(int i = 0 ; i < numOfPerson ; i++) {
-			if(deleteName.compareTo(piArr[i].getName())==0) {
-				//요소를 삭제하기 위해 참조값을 null로 변경
-				piArr[i] = null;
-				//삭제된 요소의 인덱스값 저장
-				deleteIndex = i;
-				//전체카운트 변수 -1 차감
-				numOfPerson--;
-			}
+		try {
+			
+			//1.쿼리문준비 : 값의 세팅이 필요한 부분을 ?로 대체한다. 
+			String query = "DELETE FROM phonebook_tb WHERE name=?";
+			
+			//2.prepared객체 생성 : 생성시 준비한 쿼리문을 인자로 전달한다. 
+			psmt = con.prepareStatement(query);			
+			
+			//4.인파라미터 값 설정
+			psmt.setString(1, scanValue("삭제할아이디"));
+			
+			//5.쿼리실행후 결과값 반환
+			System.out.println(psmt.executeUpdate() 
+					+"행이 삭제되었습니다");
 		}
-
-		if(deleteIndex==-1) {
-			//검색된 데이터가 없는경우...
-			System.out.println("==삭제된 데이터가 없습니다==");
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		finally {
+			close();
 		}
 		
-		else {
-			/*
-			객체배열에서 검색된 요소를 삭제한후 입력된 위치의 바로뒤 요소를
-			앞으로 하나씩 교환한다. 
-			 */
-			for(int i=deleteIndex ; i<numOfPerson ; i++) {
-				piArr[i] = piArr[i+1];
-			}
-			System.out.println("==데이터("+ deleteIndex
-					+"번)가 삭제되었습니다==");
-		}
+	}//dataDelete
 	
-	}////end of deleteInfo
 	
-	//친구정보 전체보기
 	public void dataAllShow() {
-		for(int i=0 ; i < numOfPerson ; i++) {
-			piArr[i].dataAllShow();
+			
+		try {
+			
+			stmt = con.createStatement();
+			
+			String query = "SELECT * FROM phonebook_tb ";
+			
+			rs = stmt.executeQuery(query);
+			
+			System.out.println("전체 정보(이름, 전화번호, 생일)를 출력합니다.");
+			
+			while(rs.next()) {
+				String name = rs.getString("name");
+				String phone = rs.getString("phone");
+				String birthday = rs.getString("birthday");
+				System.out.printf("%-10s %-10s %-10s\n", name, phone, birthday);
+			}
+			
 		}
-
-		System.out.println("==전체정보가 출력되었습니다==");
-	}////end of dataAllShow	
+		catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
 }
 
 	
