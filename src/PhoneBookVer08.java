@@ -1,13 +1,13 @@
 import java.util.InputMismatchException;
 import java.util.Scanner;
-import ver07.PhoneSchoolInfo;
-import ver07.MenuSelectException;
-import ver07.PhoneBookManager;
-import ver07.PhoneInfo;
-import ver07.MenuItem;
-import ver07.PhoneCompanyInfo;
+import ver08.PhoneSchoolInfo;
+import ver08.MenuSelectException;
+import ver08.PhoneBookManager;
+import ver08.PhoneInfo;
+import ver08.MenuItem;
+import ver08.PhoneCompanyInfo;
 
-public class PhoneBookVer07 implements MenuItem {
+public class PhoneBookVer08 implements MenuItem {
 
 	public static void main(String[] args) {
 
@@ -23,31 +23,25 @@ public class PhoneBookVer07 implements MenuItem {
 				choice = scan.nextInt();
 
 				switch (choice) {
-
 				case DATA_INPUT: // 데이터입력
 					set.dataInput();
-
 					break;
-
 
 				case DATA_SELECT: // 데이터검색
 					set.dataSearch();
-
 					break;
-
 
 				case DATA_DELETE: // 데이터삭제
 					set.dataDelete();
-
 					break;
-
 
 				case DATA_OUTPUT: // 주소록출력
+					set.loadPhoneBookInfo();
 					set.dataAllShow();
-
 					break;
 
-				case EXIT: 
+				case EXIT: // 프로그램 종료 완
+					set.savePhoneBookInfo();
 					System.out.println("프로그램을 종료합니다.");
 					System.out.println("<<< Process finished." + "(Exit code 0)");
 					return;

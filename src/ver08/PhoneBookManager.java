@@ -1,17 +1,22 @@
-package ver07;
-
+package ver08;
+import java.lang.Exception;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Scanner;
-import ver07.SubMenuItem;
-import ver07.PhoneCompanyInfo;
-import ver07.PhoneSchoolInfo;
-import ver07.PhoneInfo;
+import ver08.SubMenuItem;
+import ver08.PhoneCompanyInfo;
+import ver08.PhoneSchoolInfo;
+import ver08.PhoneInfo;
+import java.io.Serializable;
 
-public class PhoneBookManager implements SubMenuItem {
+public class PhoneBookManager implements SubMenuItem  {
 
 	// 생성자 : 인자로 전달되는 num크기로 객체배열을 생성한다.
-	public PhoneBookManager(int num) {}
+	public PhoneBookManager(int i) {}
 	
 	//set컬렉션 생성
 	HashSet<PhoneInfo> set = new HashSet<PhoneInfo>();
@@ -144,14 +149,16 @@ public class PhoneBookManager implements SubMenuItem {
 				}
 			}
 			break;
-		}// end of datainput()
+			
+		} // end of case
 		
 		//객체저장 확인		
 		System.out.println("데이터 입력이 완료되었습니다.");
 		//저장된 객체수 얻기
 		System.out.println("[중복저장전 객체수]:"+ set.size());
-		System.out.println();	
-	}
+		System.out.println();
+		
+	} // end of dataInput()
 
 	// 데이터 검색
 	public void dataSearch() {
@@ -230,5 +237,52 @@ public class PhoneBookManager implements SubMenuItem {
 		System.out.println("==전체정보가 출력되었습니다==");
 		System.out.println();
 	}//// end of dataAllShow
-
+	
+	//정보를 파일형태로 저장하기
+	public void savePhoneBookInfo() {
+		try {
+			ObjectOutputStream out = new ObjectOutputStream(
+					new FileOutputStream("src/ver08/PhoneBook.obj"));
+						
+			System.out.println(set);
+			out.writeObject(set);
+			
+			out.close();
+			
+		}
+		
+		catch (Exception e) {
+			System.out.println("예외발생");
+			e.printStackTrace();
+		}		
+	}
+	
+	public void loadPhoneBookInfo() {
+		
+		try {
+			//역직렬화(복원)을 위한 스트림 생성
+			ObjectInputStream in = new ObjectInputStream(
+					new FileInputStream("src/ver08/PhoneBook.obj"));
+			
+			//저장된 파일에서 정보 1개 읽어오기
+			HashSet<PhoneInfo> loadset = (HashSet<PhoneInfo>) in.readObject();
+			
+			Iterator<PhoneInfo> itr = loadset.iterator();
+			
+			while(itr.hasNext()) {			
+				itr.next().dataAllShow();
+			}	
+					
+		}
+		
+		catch(Exception e) {
+			System.out.println("예외발생");
+			e.printStackTrace();
+		}
+		
+	} //end of loadPhoneBookInfo
+			
 }
+
+
+	

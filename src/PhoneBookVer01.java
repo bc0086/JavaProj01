@@ -8,7 +8,7 @@ public class PhoneBookVer01 {
 		PhoneInfo p2 = new PhoneInfo("브루스배너", "010-2222-2222");
 		
 		p1.showPhoneInfo();
-		p2.showPhoneInfo();//생년월일 입력되지 않음
+		p2.showPhoneInfo();
 	}
 
 }

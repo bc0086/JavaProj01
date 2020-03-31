@@ -1,16 +1,10 @@
 import java.util.Scanner;
-import ver04.PhoneBookManager;
-import ver04.PhoneInfo;
-import ver04.PhoneCompanyInfo;
+import ver09.PhoneBookManager;
 
-public class PhoneBookVer04 {
+public class PhoneBookVer09 {
 
 	public static void printMenu() {
 		
-		System.out.println("03Lecture\\03.JAVA\\Java소스"
-				+ "\\Ver1.0\\LevelProject" 
-				+ "java PhoneBookVer04\n" 
-				+ "Process started >>>");
 		System.out.println();
 		System.out.println("선택하세요.....");
 		System.out.println("1. 데이터 입력");
@@ -22,11 +16,11 @@ public class PhoneBookVer04 {
 
 	public static void main(String[] args) {
 
-		PhoneBookManager piArr = new PhoneBookManager(100);
+		PhoneBookManager piArr = new PhoneBookManager();
 		
-		while (true) {			
+		while (true) {
+			// 메뉴출력을 위한 메소드호출
 			printMenu();
-			
 			Scanner scan = new Scanner(System.in);
 			int choice = scan.nextInt();
 
@@ -49,12 +43,10 @@ public class PhoneBookVer04 {
 
 			case 5: //프로그램 종료
 				System.out.println("프로그램을 종료합니다.");
-				System.out.println("<<< Process finished." 
-						+ "(Exit code 0)");
-				return;
+				return;// main함수의 종료는 프로그램 종료로 이어진다.
 			}
 
-		} 
+		} // end of while
 
 	}
 

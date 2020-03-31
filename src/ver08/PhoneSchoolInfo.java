@@ -1,6 +1,6 @@
-package ver07;
+package ver08;
 
-
+import java.io.Serializable;
 
 public class PhoneSchoolInfo extends PhoneInfo{
 	

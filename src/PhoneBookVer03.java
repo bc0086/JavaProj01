@@ -14,45 +14,24 @@ public class PhoneBookVer03 {
 		System.out.println("4. 주소록 출력");
 		System.out.println("5. 프로그램 종료");
 	}
-
-//	public static void dataInput() {
-//
-//		// 사용자로부터 친구정보를 입력받기 위한 준비
-//		Scanner scan = new Scanner(System.in);
-//		String name, phoneNumber, birthday;
-//
-//		// 공통사항 입력받기
-//		System.out.print("이름:");
-//		name = scan.nextLine();
-//
-//		System.out.print("전화번호:");
-//		phoneNumber = scan.nextLine();
-//
-//		System.out.print("생년월일:");
-//		birthday = scan.nextLine();
-//
-//		PhoneInfo phoneinfo = new PhoneInfo(name, phoneNumber, birthday);
-//		
-//		phoneinfo.dataAllShow();
-//
-//	}
+	
 
 	public static void main(String[] args) {
 
 		PhoneBookManager piArr = new PhoneBookManager(100);
 		
 		while (true) {
-			// 메뉴출력을 위한 메소드호출
 			printMenu();
+			
 			Scanner scan = new Scanner(System.in);
 			int choice = scan.nextInt();
 
 			switch (choice) {
-			case 1: //데이터입력 완
+			case 1: //데이터입력
 				piArr.dataInput();
 				break;
 				
-			case 2: //데이터검색 완
+			case 2: //데이터검색 
 				piArr.dataSearch();
 				break;
 				
@@ -64,8 +43,7 @@ public class PhoneBookVer03 {
 				piArr.dataAllShow();
 				break;
 
-
-			case 5: //프로그램 종료 완
+			case 5: //프로그램 종료
 				System.out.println("프로그램을 종료합니다.");
 				return;// main함수의 종료는 프로그램 종료로 이어진다.
 			}
