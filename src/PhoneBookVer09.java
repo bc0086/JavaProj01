@@ -6,7 +6,7 @@ public class PhoneBookVer09 {
 
 	public static void printMenu() {
 		
-		System.out.println();
+		System.out.println();//
 		System.out.println("선택하세요.....");
 		System.out.println("1. 데이터 입력");
 		System.out.println("2. 데이터 검색");
@@ -31,8 +31,7 @@ public class PhoneBookVer09 {
 //		System.out.print("생년월일:");
 //		birthday = scan.nextLine();
 //
-//		PhoneInfo phoneinfo = new PhoneInfo(name, phoneNumber, birthday);
-//		
+//		PhoneInfo phoneinfo = new PhoneInfo(name, phoneNumber, birthday);//		
 //		phoneinfo.dataAllShow();
 //
 //	}
