@@ -153,7 +153,7 @@ public class PhoneBookManager implements SubMenuItem {
 		
 		while(itr.hasNext()) {			
 			PhoneInfo phoneinfo = itr.next();
-			if(searchName.equals(phoneinfo.name)) {
+			if(searchName.equals(phoneinfo.getName())) {
 				//검색결과가 있다면 플레그를 변경
 				searchFlag = true;
 				//toString()메소드를 오버라이딩 했으므로 객체를 즉시 출력가능.
@@ -184,7 +184,7 @@ public class PhoneBookManager implements SubMenuItem {
 		
 		while(itr.hasNext()) {			
 			PhoneInfo phoneinfo = itr.next();
-			if(deleteName.equals(phoneinfo.name)) {
+			if(deleteName.equals(phoneinfo.getName())) {
 				//검색결과가 있다면 플레그를 변경
 				deleteFlag = true;
 				//toString()메소드를 오버라이딩 했으므로 객체를 즉시 출력가능.

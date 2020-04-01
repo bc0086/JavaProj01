@@ -60,7 +60,7 @@ public class PhoneBookVer08 implements MenuItem {
 			}
 			
 			catch(InputMismatchException e) { // 정수이외의 문자 입력시 기능
-				System.out.println("숫자로만 입력해야 합니다.");
+				System.out.println("숫자만 입력하세요.");
 				System.out.println();
 			}			
 

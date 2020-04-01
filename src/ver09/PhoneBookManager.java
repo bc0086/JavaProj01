@@ -66,13 +66,13 @@ public class PhoneBookManager {
 			// 공통사항 입력받기
 			Scanner scan = new Scanner(System.in);
 			
-			System.out.print("이름:");
+			System.out.print("이    름:");
 			String name = scan.nextLine();
 			
 			System.out.print("전화번호:");
 			String phone = scan.nextLine();
 			
-			System.out.print("생일:");
+			System.out.print("생    일:");
 			String birthday = scan.nextLine();
 			
 			//4.인파라미터 설정하기 : ?의 순서대로 설정하고 DB이므로 인덱스는 1부터 시작.
@@ -242,7 +242,7 @@ public class PhoneBookManager {
 	public void close() {
 		
 		try {
-			//if(con!=null) con.close();
+			if(con!=null) con.close();
 			if(psmt!=null) psmt.close();	
 			if(stmt!=null) stmt.close();
 			if(rs!=null) rs.close();

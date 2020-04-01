@@ -25,7 +25,7 @@ public class PhoneInfo {
 
 	// 정보출력용 메소드
 	public void dataAllShow() {
-		System.out.println("이름 :" + getName());
+		System.out.println("이    름 :" + getName());
 		
 		System.out.println("전화번호 :" + getPhoneNumber());
 		

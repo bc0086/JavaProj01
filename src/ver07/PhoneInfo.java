@@ -4,8 +4,8 @@ import java.util.Scanner;
 
 public class PhoneInfo {
 	// 멤버변수
-	public String name;
-	public String phoneNumber;
+	private String name;
+	private String phoneNumber;
 
 	public PhoneInfo(String name, String phoneNumber) {
 		super();
@@ -45,5 +45,23 @@ public class PhoneInfo {
 			return false;
 		}
 	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	
+	
 }
 

@@ -5,11 +5,10 @@ import java.util.Scanner;
 
 public class PhoneInfo implements Serializable	{
 	// 멤버변수
-	String name;
-	String phoneNumber;
+	private String name;
+	private String phoneNumber;
 
 	public PhoneInfo(String name, String phoneNumber) {
-		super();
 		this.name = name;
 		this.phoneNumber = phoneNumber;
 	}
@@ -46,6 +45,24 @@ public class PhoneInfo implements Serializable	{
 			return false;
 		}
 	}
+
+	
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	
 }
 
 

@@ -26,7 +26,7 @@ public class PhoneBookManager implements SubMenuItem  {
 		System.out.println("03Lecture\\03.JAVA\\Java소스" + "\\Ver1.0\\LevelProject" + "java PhoneBookVer04\n"
 				+ "Process started >>>");
 		System.out.println();
-		System.out.println("선택하세요.....");
+		System.out.println("해당 번호를 선택하세요.");
 		System.out.println("1. 데이터 입력");
 		System.out.println("2. 데이터 검색");
 		System.out.println("3. 데이터 삭제");
@@ -41,13 +41,13 @@ public class PhoneBookManager implements SubMenuItem  {
 		String name, phoneNumber, major, emp;
 		int grade;
 
-		System.out.println("데이터 입력을 시작합니다..");
-		System.out.print("1.일반, 2.동창, 3.회사");
+		System.out.println("데이터 입력을 시작합니다.");
+		System.out.println("1.일 반, 2.동 창, 3.회 사");
 
 		int choice = scan.nextInt();
 
 		// 공통사항 입력받기
-		System.out.println("이름:");
+		System.out.println("이    름:");
 		name = scan.next();
 
 		System.out.println("전화번호:");
@@ -80,10 +80,10 @@ public class PhoneBookManager implements SubMenuItem  {
 			break;
 			
 		case DATA_SCHOOL: // 동창
-			System.out.print("전공:");
+			System.out.print("전 공:");
 			major = scan.next();
 
-			System.out.print("학년:");
+			System.out.print("학 년:");
 			grade = scan.nextInt();
 
 			//HashSet컬렉션으로 객체생성2			
@@ -111,7 +111,7 @@ public class PhoneBookManager implements SubMenuItem  {
 			break;			
 
 		case DATA_COMPANY: // 회사
-			System.out.print("회사명:");
+			System.out.print("회 사 명:");
 			emp = scan.next();
 
 			//HashSet컬렉션으로 객체생성3			
@@ -161,7 +161,7 @@ public class PhoneBookManager implements SubMenuItem  {
 		
 		while(itr.hasNext()) {			
 			PhoneInfo phoneinfo = itr.next();
-			if(searchName.equals(phoneinfo.name)) {
+			if(searchName.equals(phoneinfo.getName())) {
 				//검색결과가 있다면 플레그를 변경
 				searchFlag = true;
 				//toString()메소드를 오버라이딩 했으므로 객체를 즉시 출력가능.
@@ -171,10 +171,12 @@ public class PhoneBookManager implements SubMenuItem  {
 		
 		if(searchFlag == true) {
 			System.out.println("요청한 정보를 찾았습니다.");
+			System.out.println();
 		}
 		
 		else {
 			System.out.println("요청한 정보는 없습니다.");
+			System.out.println();
 		}
 		
 	}//// end of dataSearch
@@ -192,7 +194,7 @@ public class PhoneBookManager implements SubMenuItem  {
 		
 		while(itr.hasNext()) {			
 			PhoneInfo phoneinfo = itr.next();
-			if(deleteName.equals(phoneinfo.name)) {
+			if(deleteName.equals(phoneinfo.getName())) {
 				//검색결과가 있다면 플레그를 변경
 				deleteFlag = true;
 				//toString()메소드를 오버라이딩 했으므로 객체를 즉시 출력가능.
@@ -208,11 +210,11 @@ public class PhoneBookManager implements SubMenuItem  {
 		}
 		
 		else {
-			System.out.println("삭제된 데이터가 없습니다..");
+			System.out.println("삭제할 정보가 없습니다.");
 			System.out.println();
 		}
 
-	}//// end of deleteInfo
+	}//// end of deleteInfo		
 
 	 //친구정보 전체보기
 	public void dataAllShow() {			
