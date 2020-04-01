@@ -72,20 +72,7 @@ public class PhoneBookManager implements SubMenuItem {
 					break;				
 				}				
 			}
-			break;
-			
-			
-			/*
-			PhoneInfo pi1 = new PhoneInfo(name, phoneNumber);
-			PhoneInfo pi2 = new PhoneInfo(name, phoneNumber);
-			set.add(pi1);
-			set.add(pi2);
-			
-			이렇게 표현해야 할 것을 다음과 같이 표현가능하게 됨.
-			
-			set.add(new PhoneInfo(name, phoneNumber);
-			break;
-			*/
+			break;			
 
 		case DATA_SCHOOL: // 동창
 			System.out.print("전공:");

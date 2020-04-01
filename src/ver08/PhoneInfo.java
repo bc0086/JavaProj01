@@ -19,15 +19,13 @@ public class PhoneInfo implements Serializable	{
 		System.out.println("이름 :" + name);
 
 		System.out.println("전화번호 :" + phoneNumber);
-
 	}
 
+	
 	@Override
 	public String toString() {
 		return "이름=" + name + ", 전화번호=" + phoneNumber;
 	}
-
-	
 
 	@Override
 	public int hashCode() {

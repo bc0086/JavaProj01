@@ -18,15 +18,13 @@ public class PhoneInfo {
 		System.out.println("이름 :" + name);
 
 		System.out.println("전화번호 :" + phoneNumber);
-
-	}
-
-	@Override
-	public String toString() {
-		return "이름=" + name + ", 전화번호=" + phoneNumber;
 	}
 
 	
+	@Override
+	public String toString() {
+		return "이름=" + name + ", 전화번호=" + phoneNumber;
+	}	
 
 	@Override
 	public int hashCode() {
@@ -48,17 +46,4 @@ public class PhoneInfo {
 		}
 	}
 }
-//	@Override
-//	public boolean equals(Object obj) {
-//		//형변환
-//		PhoneInfo phoneinfo = (PhoneInfo)obj;
-//		if(phoneinfo.name.equals(this.name) &&
-//				phoneinfo.phoneNumber.equals(this.phoneNumber)) {
-//			return true;
-//		}
-//		else {
-//			return false;
-//		}
-//	}
-
 

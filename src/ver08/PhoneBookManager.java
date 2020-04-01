@@ -79,19 +79,6 @@ public class PhoneBookManager implements SubMenuItem  {
 			}
 			break;
 			
-			
-			/*
-			PhoneInfo pi1 = new PhoneInfo(name, phoneNumber);
-			PhoneInfo pi2 = new PhoneInfo(name, phoneNumber);
-			set.add(pi1);
-			set.add(pi2);
-			
-			이렇게 표현해야 할 것을 다음과 같이 표현가능하게 됨.
-			
-			set.add(new PhoneInfo(name, phoneNumber);
-			break;
-			*/
-
 		case DATA_SCHOOL: // 동창
 			System.out.print("전공:");
 			major = scan.next();
@@ -154,6 +141,7 @@ public class PhoneBookManager implements SubMenuItem  {
 		
 		//객체저장 확인		
 		System.out.println("데이터 입력이 완료되었습니다.");
+		
 		//저장된 객체수 얻기
 		System.out.println("[중복저장전 객체수]:"+ set.size());
 		System.out.println();
